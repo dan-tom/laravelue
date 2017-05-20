@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,7 +24,25 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('home');
+	{
+		
+		$id = Auth::id();
+        $level = DB::table('users')->where('id', $id)->first();
+        
+        
+        if ($level->level == 1) {
+	        
+	        
+		        $tasks = DB::table('tasks')
+	            ->leftJoin('users', 'tasks.id_client', '=', 'users.id')
+	            ->leftJoin('status', 'tasks.id_status', '=', 'status.id_status')
+	            ->select('tasks.*', 'status.name', 'users.email')
+	            ->get();
+
+			   return view('home', ['tasks' => $tasks]);
+        
+        } else { 
+        	return "plebs";
+        }
     }
 }

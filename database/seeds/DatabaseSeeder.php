@@ -11,10 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Daniel',
-            'email' => 'dt@upland.digital',
-            'password' => bcrypt('upland'),
-        ]);
+     Eloquent::unguard();
+
+      $this->call('TaskMain');
     }
 }
