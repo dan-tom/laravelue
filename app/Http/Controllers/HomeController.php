@@ -37,6 +37,7 @@ class HomeController extends Controller
 	            ->leftJoin('users', 'tasks.id_client', '=', 'users.id')
 	            ->leftJoin('status', 'tasks.id_status', '=', 'status.id_status')
 	            ->select('tasks.*', 'status.name', 'users.email')
+	            ->orderBy('tasks.created_at', 'desc')
 	            ->get();
 
 			   return view('home', ['tasks' => $tasks]);

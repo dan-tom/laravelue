@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 use App\task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class tasks extends Controller
 {
@@ -37,9 +37,6 @@ class tasks extends Controller
      */
     public function store(Request $request)
     {
-	    
-	    
-	    
 	        $this->validate($request, [
         'subject' => 'required',
     ]);
@@ -98,5 +95,6 @@ class tasks extends Controller
     public function destroy($id)
     {
         //
-    }
+    }	
+
 }

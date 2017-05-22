@@ -20,3 +20,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get("create", 'tasks@index');
 Route::post("store", 'tasks@store');
+
+
+
+Route::get('/tasks/{id}', 'posts@post');
+
+
+
+
+
+
+Route::post('/tasks/{id}/poststore', 'posts@store');
+Route::post('/tasks/{id}/close', 'posts@close');

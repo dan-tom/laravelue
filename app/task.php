@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class task extends Model
 {	
-    protected $fillable = ['subject', 'description', 'level', 'domain', 'id_client', 'id_status', 'close'];
+    protected $fillable = ['subject', 'description', 'level', 'domain', 'id_client', 'id_status', 'close', 'close'];
+    
+    protected $guarded = ['id'];
     
     
 }

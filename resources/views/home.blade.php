@@ -24,18 +24,26 @@
 								<th>Klient</th>
 								<th>Przypisany agent</th>
 								<th>Status zgłoszenia</th>
+								<th>Akcja</th>
 		                    </tr>
 	                    </thead>
 	                    <tbody>
 							@foreach ($tasks as $tasks)
 							<tr>
-								<td>{{ $tasks->id }}</td>
+								<td>{{$tasks->id }}</td>
 								<td>{{ $tasks->subject }}</td>
 								<td>{{ date('F d, Y', strtotime($tasks->created_at)) }}</td>
 								<td>{{ $tasks->domain }}</td>
 								<td>{{ $tasks->email }}</td>
-								<td>{{ $tasks->id_agent }}</td>
+								<td>
+									@if (!isset($tasks->id_agent))
+									Oczekuje na przypisanie
+									@else
+									{{ $tasks->id_agent }}
+									@endif
+ </td>
 								<td>{{ $tasks->name }}</td>
+								<td><a href="{{ url('/tasks/') }}/{{$tasks->id }}" class="btn btn-default">Pokaż</a></td>
 							@endforeach
 							</tr>
 	                    </tbody>
