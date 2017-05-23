@@ -117,7 +117,31 @@ class posts extends Controller
 			   return view('task', ['tasks' => $tasks, 'posts' => $posts]);
         
         } else { 
-        	return "plebs";
+        	
+        	
+        	
+        	 $tasks = DB::table('tasks')
+	            ->leftJoin('users', 'tasks.id_client', '=', 'users.id')
+	            ->leftJoin('status', 'tasks.id_status', '=', 'status.id_status')
+	            ->select('tasks.*', 'status.name', 'users.email')
+	            ->where('tasks.id', '=', $id)
+	            ->orderBy('tasks.created_at', 'desc')
+	            ->get();
+
+
+		        $posts = DB::table('posts')
+	            ->leftJoin('users', 'posts.id_user', '=', 'users.id')
+	            ->select('posts.*', 'users.email', 'users.name')
+	            ->where('posts.id_task', '=', $id)
+	            ->orderBy('posts.created_at', 'asc')
+	            ->get();
+
+
+
+
+			   return view('task', ['tasks' => $tasks, 'posts' => $posts]);
+        	
+        	
         }
 	}
 	

@@ -22,7 +22,6 @@
 								<th>Data zgłoszenia</th>
 								<th>Domena</th>
 								<th>Klient</th>
-								<th>Przypisany agent</th>
 								<th>Status zgłoszenia</th>
 		                    </tr>
 	                    </thead>
@@ -34,13 +33,7 @@
 								<td>{{ date('F d, Y', strtotime($tasks->created_at)) }}</td>
 								<td>{{ $tasks->domain }}</td>
 								<td>{{ $tasks->email }}</td>
-								<td>
-									@if (!isset($tasks->id_agent))
-									Oczekuje na przypisanie
-									@else
-									{{ $tasks->id_agent }}
-									@endif
- </td>
+
 								<td>{{ $tasks->name }}</td>
 							@endforeach
 							</tr>

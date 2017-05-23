@@ -36,14 +36,26 @@ class HomeController extends Controller
 		        $tasks = DB::table('tasks')
 	            ->leftJoin('users', 'tasks.id_client', '=', 'users.id')
 	            ->leftJoin('status', 'tasks.id_status', '=', 'status.id_status')
-	            ->select('tasks.*', 'status.name', 'users.email')
+	            ->select('tasks.*', 'status.name', 'users.email', 'users.level')
 	            ->orderBy('tasks.created_at', 'desc')
 	            ->get();
 
 			   return view('home', ['tasks' => $tasks]);
         
         } else { 
-        	return "plebs";
+        	
+        	
+        		$tasksuser = DB::table('tasks')
+	            ->leftJoin('users', 'tasks.id_client', '=', 'users.id')
+	            ->leftJoin('status', 'tasks.id_status', '=', 'status.id_status')
+	            ->select('tasks.*', 'status.name', 'users.email', 'users.level')
+	            ->where('tasks.id_client', '=', $id)
+	            ->orderBy('tasks.created_at', 'desc')
+	            ->get();
+
+			   return view('home', ['tasks' => $tasksuser]);
+        	
+        	
         }
     }
 }
