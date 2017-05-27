@@ -39,8 +39,15 @@ class HomeController extends Controller
 	            ->select('tasks.*', 'status.name', 'users.email', 'users.level')
 	            ->orderBy('tasks.created_at', 'desc')
 	            ->get();
+	            
+	            
+	            $user = DB::table('users')
+	            ->select('users.level')
+	            ->where('users.id', '=', $id)
+	            ->get();
+	            
 
-			   return view('home', ['tasks' => $tasks]);
+			   return view('home', ['tasks' => $tasks, 'user' => $user]);
         
         } else { 
         	
@@ -52,8 +59,14 @@ class HomeController extends Controller
 	            ->where('tasks.id_client', '=', $id)
 	            ->orderBy('tasks.created_at', 'desc')
 	            ->get();
+	            
+	            
+	             $user = DB::table('users')
+	            ->select('users.level')
+	            ->where('users.id', '=', $id)
+	            ->get();
 
-			   return view('home', ['tasks' => $tasksuser]);
+			   return view('home', ['tasks' => $tasksuser, 'user' => $user]);
         	
         	
         }

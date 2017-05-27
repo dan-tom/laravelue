@@ -40,10 +40,11 @@
                     
                
                 
-
-	                @if($tasks->level === 3)
+					@foreach ($user as $user)
+	                @if($user->level === 3)
 	                 <a href="{{ url('/create/') }}" class="btn btn-primary pull-right">Dodaj zgłoszenie</a>
-					  @endif
+					@endif
+					@endforeach
                  </div>
             </div>
         </div>
